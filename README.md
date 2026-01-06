@@ -8,21 +8,25 @@ My personal development environment configuration files.
 
 1. Clone this repository:
 ```bash
-git clone git@github.com:fernanluyano/dev-environment.git ~/dev-environment
 ```
 
 2. Create symlinks to your home directory:
 ```bash
 # Backup your current configs first!
 mv ~/.zshrc ~/.zshrc.backup
+mv ~/.tmux.conf ~/.tmux.conf.backup
+mv ~/.config/nvim ~/.config/nvim.backup
 
 # Create symlinks
 ln -s ~/dev-environment/.zshrc ~/.zshrc
+ln -s ~/dev-environment/.tmux.conf ~/.tmux.conf
+ln -s ~/dev-environment/nvim ~/.config/nvim
 ```
 
-3. Reload your shell:
+3. Reload your configurations:
 ```bash
 source ~/.zshrc
+tmux source ~/.tmux.conf  # if tmux is running
 ```
 
 ## Private Configuration
@@ -86,11 +90,12 @@ alias personal_server="ssh user@192.168.1.100"
 
 ## What's Included
 
-- **Oh My Zsh** configuration with robbyrussell theme
-- **Plugins:** git, tmux (with auto-start)
+- **Zsh configuration** with Oh My Zsh (robbyrussell theme)
+- **Tmux configuration** with auto-start on shell launch
+- **Neovim configuration** (custom setup)
+- **Plugins:** git, tmux
 - **Tools:** pyenv, nvm, pnpm, sdkman, zoxide
 - **Editor:** neovim as default (with helpful aliases)
-- **Tmux:** Auto-starts on shell launch
 
 ## Requirements
 
