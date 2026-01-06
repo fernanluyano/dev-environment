@@ -45,8 +45,12 @@ export EDITOR=nvim
 
 alias vim=nvim
 alias aws_creds="vim ~/.aws/credentials"
+
 alias edit_zsh="vim ~/.zshrc"
+alias source_zsh="source ~/.zshrc"
+
 alias edit_nvim="vim ~/.config/nvim"
+
 alias edit_tmux="vim ~/.tmux.conf"
 
 eval "$(zoxide init zsh)"
