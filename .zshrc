@@ -10,7 +10,16 @@ ZSH_THEME="robbyrussell"
 
 # Make sure you have git and tmux installed
 plugins=(git tmux)
-ZSH_TMUX_AUTOSTART=true
+
+# Only autostart tmux if SKIP_TMUX is not set. A use case is for other 
+# IDEs / Editors if you don't want them to start it with tmux
+#
+# export SKIP_TMUX=1
+if [ -z "$SKIP_TMUX" ]; then
+    ZSH_TMUX_AUTOSTART=true
+else
+    ZSH_TMUX_AUTOSTART=false
+fi
 
 source $ZSH/oh-my-zsh.sh
 
