@@ -8,6 +8,7 @@ My personal development environment configuration files.
 
 1. Clone this repository:
 ```bash
+git clone git@github.com:fernanluyano/dev-environment.git ~/dev-environment
 ```
 
 2. Create symlinks to your home directory:
@@ -73,6 +74,9 @@ echo "    > USER: $(whoami)"
 echo "    > TIME: $(date '+%H:%M:%S')"
 echo "    > PATH: $(pwd)\033[0m"
 echo ""
+
+# Tmux location (used by dracula theme)
+export TMUX_LOCATION="New York"
 
 # Private environment variables
 export OPENAI_API_KEY="your-key-here"
