@@ -1,0 +1,4 @@
+{
+  "keyMappings": "\" remap scrolling\nunmap u\nunmap d\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp\n\n\" remap the next and prev tabs\nunmap J\nunmap K\nunmap H\nunmap L\nmap H previousTab\nmap L nextTab",
+  "settingsVersion": "2.3.1"
+}

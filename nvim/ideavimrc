@@ -1,0 +1,259 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" This file is only for Intellij. It's here to have it all saved in my vim configs
+
+" leader key
+let mapleader = ' '
+nnoremap <SPACE> <NOP>
+
+" ### PLUGINS ###
+" Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+" Nerd Tree
+Plug 'preservim/nerdtree'
+set NERDTree
+
+" ### Options ###
+" Keybindings popup menu. Install first https://plugins.jetbrains.com/plugin/15976-which-key
+set which-key
+set notimeout
+
+" enable mouse in the editor
+set mouse=a
+
+" Sync system clipboard with vim
+set clipboard^=unnamed,unnamedplus
+
+" jump between angle brackets
+set matchpairs+=<:>
+
+" smart line joining
+set ideajoin
+
+" show a few lines of context around the cursor
+set scrolloff=5
+
+" Don't use Ex mode
+map Q <leader>qq
+
+" Map undo and redo in normal mode
+nnoremap <C-z> u
+nnoremap <C-S-z> <C-r>
+
+" Do incremental searching
+set incsearch
+
+" case insensitive search
+set ignorecase
+
+" enable case sensitive search when an upper case is present
+set smartcase
+
+" highlight search results
+set hlsearch
+
+" Remove search highlight when escaped
+nnoremap <Esc> :nohlsearch<cr>
+
+" Move up and down
+map <M-k> <Action>(EditorUp)
+map <M-j> <Action>(EditorDown)
+
+ " Groups preix docs
+let g:WhichKeyDesc_buffer = "<leader>b +buffer"
+let g:WhichKeyDesc_window = "<leader>w +window"
+let g:WhichKeyDesc_find = "<leader>f +find"
+let g:WhichKeyDesc_search = "<leader>s +search"
+let g:WhichKeyDesc_git = "<leader>g +git"
+let g:WhichKeyDesc_code = "<leader>c +code"
+let g:WhichKeyDesc_compile = "<leader>C +compile/build"
+let g:WhichKeyDesc_error = "<leader>e +error"
+let g:WhichKeyDesc_ui = "<leader>u +ui"
+
+" Window/Tab/Buffer management
+
+map <leader>bd <Action>(CloseContent)
+let g:WhichKeyDesc_buffer_close = "<leader>bd Close Current Buffer/File"
+
+map <leader>bD <Action>(CloseAllEditors)
+let g:WhichKeyDesc_buffer_close_all = "<leader>bD Close All Buffers/Files"
+
+map <leader>bo <Action>(CloseAllEditorsButActive)
+let g:WhichKeyDesc_buffer_close_other = "<leader>bo Close Other Buffers/Files"
+
+map <leader>bp <Action>(PinActiveEditorTab)
+let g:WhichKeyDesc_buffer_pin_current = "<leader>bp Pin Current Buffer/File"
+
+map <leader>bP <Action>(CloseAllUnpinnedEditors)
+let g:WhichKeyDesc_buffer_delete_unpinned = "<leader>bP Close Unpinned Buffers/Files"
+
+map <leader>br <Action>(CloseAllToTheRight)
+let g:WhichKeyDesc_buffer_delete_to_right = "<leader>br Close Buffers/Files to the Right"
+
+map <leader>bl <Action>(CloseAllToTheLeft)
+let g:WhichKeyDesc_buffer_delete_to_left = "<leader>bl Close Buffers/Files to the Left"
+
+map <leader>wv <Action>(SplitVertically)
+let g:WhichKeyDesc_window_vsplit = "<leader>wv Split Right"
+
+map <leader>ws <Action>(SplitHorizontally)
+let g:WhichKeyDesc_window_split = "<leader>ws Split Below"
+
+map <leader>wq <Action>(Unsplit)
+let g:WhichKeyDesc_window_unsplit = "<leader>wq Close Current Split"
+
+map <leader>waq <Action>(UnsplitAll)
+let g:WhichKeyDesc_window_unsplit_all = "<leader>waq Unsplit All Panels"
+
+" Switch to Left Split
+nnoremap <C-h> <C-w>h
+
+" Switch to Right Split
+nnoremap <C-l> <C-w>l
+
+" Switch to Bottom Split
+nnoremap <C-j> <C-w>j
+
+" Switch to Top Split
+nnoremap <C-k> <C-w>k
+
+map <leader>E <Action>(ActivateProjectToolWindow)
+let g:WhichKeyDesc_goto_explorer = "<leader>E Open Project Explorer"
+
+" ### GOTOs ###
+map gd <Action>(GotoDeclaration)
+let g:WhichKeyDesc_goto_declaration = "gd Goto Declaration"
+
+map gi <Action>(GotoImplementation)
+let g:WhichKeyDesc_goto_implementation = "gi Goto Implementation"
+
+map gl <Action>(GotoLine)
+let g:WhichKeyDesc_goto_line = "gl Goto Line"
+
+map gm <Action>(GotoSuperMethod)
+let g:WhichKeyDesc_goto_super = "gm Goto Super Method"
+
+map gr <Action>(RecentLocations)
+let g:WhichKeyDesc_goto_recent_locs = "gr Open Recent Locations"
+
+map gt <Action>(GotoTest)
+let g:WhichKeyDesc_goto_test = "gt Goto Test"
+
+map gy <Action>(GotoTypeDeclaration)
+let g:WhichKeyDesc_goto_type = "gy Goto Type Declaration"
+
+
+" ### Find, Search and Show ###
+map <leader>ff <Action>(GotoFile)
+let g:WhichKeyDesc_find_file = "<leader>ff Find File"
+
+map <leader>fg <Action>(FindInPath)
+let g:WhichKeyDesc_find_in_path = "<leader>fg Find in Files"
+
+map <leader>fr <Action>(RecentFiles)
+let g:WhichKeyDesc_recent_files = "<leader>fr Open Recent Files"
+
+map <leader>sa <Action>(GotoAction)
+let g:WhichKeyDesc_search_action = "<leader>sa Search an Action"
+
+map <leader>sc <Action>(GotoClass)
+let g:WhichKeyDesc_search_class = "<leader>sc Search a Class"
+
+map <leader>sh <Action>(ShowHoverInfo)
+let g:WhichKeyDesc_show_hover = "<leader>sh Show Hover Info"
+
+map <leader>sS <Action>(GotoSymbol)
+let g:WhichKeyDesc_search_ws_symbol = "<leader>sS Search Workspace Symbol"
+
+map <leader>ss <Action>(FileStructurePopup)
+let g:WhichKeyDesc_search_file_symbol = "<leader>ss Open File Symbols"
+
+map <leader>st <Action>(QuickTypeDefinition)
+let g:WhichKeyDesc_quick_type_def = "<leader>st Quick Type Definition"
+
+map <leader>sT <Action>(ActivateTODOToolWindow)
+let g:WhichKeyDesc_show_todos = "<leader>sT Show TODOs"
+
+
+" ### GIT ###
+map <leader>gb <Action>(Annotate)
+let g:WhichKeyDesc_git_blame = "<leader>gb Git Blame"
+
+map <leader>gc <Action>(ActivateCommitToolWindow)
+let g:WhichKeyDesc_git_commit = "<leader>gc Git Commit"
+
+map <leader>gd <Action>(Compare.SameVersion)
+let g:WhichKeyDesc_git_diff = "<leader>gd Git Diff"
+
+
+" ### Code Actions ###
+
+map <leader>ca <Action>(ShowIntentionActions)
+let g:WhichKeyDesc_show_context_actions = "<leader>ca Show Code Actions"
+
+map <leader>Cc <Action>(CompileDirty)
+let g:WhichKeyDesc_code_compile = "<leader>Cc Compile Code"
+
+map <leader>cc <Action>(EditorCompleteStatement)
+let g:WhichKeyDesc_code_complete_statement = "<leader>cc Complete Code Statement"
+
+map <leader>cd <Action>(EditorDuplicateLines)
+let g:WhichKeyDesc_code_dup_lines = "<leader>cd Duplicated Lines"
+
+map <leader>cf <Action>(ReformatCode)
+let g:WhichKeyDesc_code_reformat = "<leader>cf Format Code"
+
+map <leader>cg <Action>(Generate)
+let g:WhichKeyDesc_code_generate = "<leader>cg Generate..."
+
+map <leader>ci <Action>(OptimizeImports)
+let g:WhichKeyDesc_optimize_imports = "<leader>ci Optimize Imports"
+
+map <leader>cml <Action>(MoveLineDown)
+let g:WhichKeyDesc_mv_line_down = "<leader>cml Move Line Down"
+
+map <leader>cmL <Action>(MoveLineUp)
+let g:WhichKeyDesc_mv_line_up = "<leader>cmL Move Line Up"
+
+map <leader>cms <Action>(MoveStatementDown)
+let g:WhichKeyDesc_mv_statement_down = "<leader>cms Move Statement Down"
+
+map <leader>cmS <Action>(MoveStatementUp)
+let g:WhichKeyDesc_mv_statement_up = "<leader>cmS move Statement Up"
+
+map <leader>cr <Action>(RenameElement)
+let g:WhichKeyDesc_rename_elem = "<leader>cr Rename Element"
+
+map <leader>cR <Action>(Refactorings.QuickListPopupAction)
+let g:WhichKeyDesc_code_refactorings = "<leader>cR Show Refactorings List"
+
+map <leader>cs <Action>(SurroundWith)
+let g:WhichKeyDesc_code_surround_with = "<leader>cs Surround With"
+
+map <leader>ct <Action>(ActivateGitHubCopilotChatToolWindow)
+let g:WhichKeyDesc_toggle_copilot = "<leader>ct Toggle Copilot Chat"
+
+let g:WhichKeyDesc_commentary_line = "gcc Toggle Line Comment"
+let g:WhichKeyDesc_commentary = "gc{motion} Toggle Comment for Motion"
+let g:WhichKeyDesc_commentary_visual = "gc Comment Selection"
+
+
+" ### Code Errors ###
+map <leader>eb <Action>(GotoPreviousError)
+let g:WhichKeyDesc_error_prev = "<leader>eb Goto Previous Error"
+
+map <leader>en <Action>(GotoNextError)
+let g:WhichKeyDesc_error_next = "<leader>en Goto Next Error"
+
+" ### UI ###
+map <leader>ua <Action>(VimFindActionIdAction)
+let g:WhichKeyDesc_ui_action_id = "<leader>ua Toggle Action Id Tracking"
