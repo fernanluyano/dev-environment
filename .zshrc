@@ -57,7 +57,7 @@ alias aws_creds="vim ~/.aws/credentials"
 
 alias edit_zsh="vim ~/.zshrc"
 alias source_zsh="source ~/.zshrc"
-
+alias cd=z
 alias edit_nvim="vim ~/.config/nvim"
 
 alias edit_tmux="vim ~/.tmux.conf"
