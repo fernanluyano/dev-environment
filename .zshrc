@@ -64,6 +64,11 @@ alias edit_tmux="vim ~/.tmux.conf"
 
 eval "$(zoxide init zsh)"
 
+# Load oh my posh
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config ~/atomic.omp.json)"
+fi
+
 # Load private configuration
 if [ -f ~/.zshrc_private ]; then
     source ~/.zshrc_private
