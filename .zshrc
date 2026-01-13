@@ -25,10 +25,6 @@ source $ZSH/oh-my-zsh.sh
 
 eval $(ssh-agent)
 
-export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
-[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
-
-
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
