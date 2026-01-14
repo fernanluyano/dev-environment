@@ -45,6 +45,11 @@ brew install --cask iterm2
 brew install wget
 ```
 
+**fzf** - Fuzzy finder for command-line
+```bash
+brew install fzf
+```
+
 **Git** - Version control
 ```bash
 brew install git
@@ -72,7 +77,9 @@ sdk install scala 2.12.20
 sdk install scalacli
 ```
 
-### Terminal Enhancement
+### Terminal Enhancement (Optional)
+
+These tools enhance the visual appearance of your terminal but are not required for functionality.
 
 **Nerd Fonts** - Fonts with icons and glyphs
 ```bash
@@ -168,6 +175,15 @@ dev-environment/
 └── README.md        # This file
 ```
 
+### Defensive Loading
+
+The `.zshrc` configuration is designed to be defensive and won't fail if tools are missing. Instead, it will:
+- Display warnings for missing optional tools
+- Fall back to sensible defaults (e.g., `vim` if `nvim` is not installed)
+- Continue loading even if some tools aren't available
+
+This allows you to install tools gradually without breaking your shell.
+
 ### Customization
 
 Each configuration file can be customized to your preferences:
@@ -244,25 +260,6 @@ function project() {
 
 ## 🚀 Usage
 
-### Basic Commands
-
-After installation, you'll have access to enhanced shell features:
-
-```bash
-# Zoxide - smart directory jumping
-z project-name      # Jump to frequently used directory
-zi                  # Interactive directory selection
-
-# Tmux - terminal multiplexing
-tmux                # Start new session
-tmux attach         # Attach to existing session
-<prefix> c          # Create new window
-<prefix> %          # Split pane vertically
-
-# Neovim
-nvim filename       # Open file in Neovim
-```
-
 ### Updating
 
 To update your environment with the latest changes:
@@ -328,7 +325,7 @@ echo 'source "$HOME/.sdkman/bin/sdkman-init.sh"' >> ~/.zshrc
 
 ## 🤝 Contributing
 
-This is a personal configuration, but suggestions are welcome! I recommend you fork it to customize if desired. 
+This is a personal configuration, but suggestions are welcome!
 
 ## 📝 License
 

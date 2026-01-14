@@ -21,9 +21,17 @@ else
     ZSH_TMUX_AUTOSTART=false
 fi
 
-source $ZSH/oh-my-zsh.sh
+# Source Oh My Zsh if available
+if [ -f "$ZSH/oh-my-zsh.sh" ]; then
+    source $ZSH/oh-my-zsh.sh
+else
+    echo "⚠️  Warning: Oh My Zsh not found at $ZSH"
+fi
 
-eval $(ssh-agent)
+# SSH Agent
+if command -v ssh-agent &> /dev/null; then
+    eval $(ssh-agent) 2>/dev/null
+fi
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -33,36 +41,65 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-eval "$(pyenv virtualenv-init -)"
+# pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv &> /dev/null; then
+    eval "$(pyenv init -)"
+    if command -v pyenv-virtualenv-init &> /dev/null; then
+        eval "$(pyenv virtualenv-init -)"
+    fi
+else
+    echo "⚠️  Warning: pyenv not found (optional tool)"
+fi
 
-# NEOVIM
-
-export NVIM_DIR="$HOME/.nvm"
-[ -s "$NVIM_DIR/nvm.sh" ] && \. "$NVIM_DIR/nvm.sh"
+# NVM (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-export VISUAL=nvim
-export EDITOR=nvim
+# NEOVIM
+if command -v nvim &> /dev/null; then
+    export VISUAL=nvim
+    export EDITOR=nvim
+    alias vim=nvim
+else
+    echo "⚠️  Warning: neovim not found"
+    export VISUAL=vim
+    export EDITOR=vim
+fi
 
 # Aliases
-
-alias vim=nvim
-alias aws_creds="vim ~/.aws/credentials"
-
-alias edit_zsh="vim ~/.zshrc"
+alias aws_creds="$EDITOR ~/.aws/credentials"
+alias edit_zsh="$EDITOR ~/.zshrc"
 alias source_zsh="source ~/.zshrc"
-alias cd=z
-alias edit_nvim="vim ~/.config/nvim"
+alias edit_nvim="$EDITOR ~/.config/nvim"
+alias edit_tmux="$EDITOR ~/.tmux.conf"
 
-alias edit_tmux="vim ~/.tmux.conf"
+# Zoxide - only set alias if available
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+    alias cd=z
+else
+    echo "⚠️  Warning: zoxide not found (cd command will use default behavior)"
+fi
 
-eval "$(zoxide init zsh)"
+# SDKMan
+if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
 
-# Load oh my posh
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/atomic.omp.json)"
+# Oh My Posh - only load if available and not in Apple Terminal
+if command -v oh-my-posh &> /dev/null; then
+    if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+        if [ -f ~/atomic.omp.json ]; then
+            eval "$(oh-my-posh init zsh --config ~/atomic.omp.json)"
+        else
+            echo "⚠️  Warning: oh-my-posh theme file ~/atomic.omp.json not found"
+        fi
+    fi
+else
+    echo "⚠️  Warning: oh-my-posh not found (using default prompt)"
 fi
 
 # Load private configuration
