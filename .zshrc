@@ -84,10 +84,6 @@ else
     echo "⚠️  Warning: zoxide not found (cd command will use default behavior)"
 fi
 
-# SDKMan
-if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
-    source "$HOME/.sdkman/bin/sdkman-init.sh"
-fi
 
 # Oh My Posh - only load if available and not in Apple Terminal
 if command -v oh-my-posh &> /dev/null; then

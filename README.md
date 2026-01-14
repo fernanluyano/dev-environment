@@ -319,8 +319,8 @@ tmux show-options -g
 # Source the SDKMan init script
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# Add to .zshrc if not already present
-echo 'source "$HOME/.sdkman/bin/sdkman-init.sh"' >> ~/.zshrc
+# Add to .zshrc_private if not already present
+echo 'source "$HOME/.sdkman/bin/sdkman-init.sh"' >> ~/.zshrc_private
 ```
 
 ## 🤝 Contributing
