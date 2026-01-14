@@ -64,8 +64,10 @@ gh auth login  # Follow the prompts to authenticate
 ### Development Tools
 
 **SDKMan** - SDK version manager (Java, Scala, etc.)
-- Install from: https://sdkman.io/install/
-- Don't forget to source your script as shown at the end of the installation
+```bash
+brew install sdkman-cli
+```
+- More info: https://github.com/sdkman/homebrew-tap
 
 Example SDK installations:
 ```bash

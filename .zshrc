@@ -33,6 +33,14 @@ if command -v ssh-agent &> /dev/null; then
     eval $(ssh-agent) 2>/dev/null
 fi
 
+# SDKMan - only load if installed
+if command -v sdk &> /dev/null; then
+    export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+    [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+else
+    echo "⚠️  Warning: sdkman not found (optional tool)"
+fi
+
 # pnpm - only configure if installed
 if command -v pnpm &> /dev/null; then
     export PNPM_HOME="$HOME/Library/pnpm"
