@@ -91,15 +91,13 @@ fi
 
 # Oh My Posh - only load if available and not in Apple Terminal
 if command -v oh-my-posh &> /dev/null; then
-    if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-        if [ -f ~/atomic.omp.json ]; then
-            eval "$(oh-my-posh init zsh --config ~/atomic.omp.json)"
-        else
-            echo "⚠️  Warning: oh-my-posh theme file ~/atomic.omp.json not found"
-        fi
-    fi
+  if [ -f ~/atomic.omp.json ]; then
+    eval "$(oh-my-posh init zsh --config ~/atomic.omp.json)"
+  else
+    echo "⚠️  Warning: oh-my-posh theme file ~/atomic.omp.json not found"
+  fi
 else
-    echo "⚠️  Warning: oh-my-posh not found (using default prompt)"
+  echo "⚠️  Warning: oh-my-posh not found (using default prompt)"
 fi
 
 # Load private configuration
