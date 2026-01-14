@@ -33,12 +33,16 @@ if command -v ssh-agent &> /dev/null; then
     eval $(ssh-agent) 2>/dev/null
 fi
 
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+# pnpm - only configure if installed
+if command -v pnpm &> /dev/null; then
+    export PNPM_HOME="$HOME/Library/pnpm"
+    case ":$PATH:" in
+      *":$PNPM_HOME:"*) ;;
+      *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+else
+    echo "⚠️  Warning: pnpm not found"
+fi
 # pnpm end
 
 # pyenv
@@ -53,10 +57,14 @@ else
     echo "⚠️  Warning: pyenv not found (optional tool)"
 fi
 
-# NVM (Node Version Manager)
+# NVM (Node Version Manager) - only load if installed
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+else
+    echo "⚠️  Warning: nvm not found at $NVM_DIR"
+fi
 
 # NEOVIM
 if command -v nvim &> /dev/null; then
@@ -84,19 +92,18 @@ else
     echo "⚠️  Warning: zoxide not found (cd command will use default behavior)"
 fi
 
+# Load private configuration first
+if [ -f ~/.zshrc_private ]; then
+    source ~/.zshrc_private
+fi
 
-# Oh My Posh - only load if available and not in Apple Terminal
+# Oh My Posh - only load if available
 if command -v oh-my-posh &> /dev/null; then
-  if [ -f ~/atomic.omp.json ]; then
-    eval "$(oh-my-posh init zsh --config ~/atomic.omp.json)"
+  if [ -n "$OHMYPOSH_THEME" ] && [ -f "$OHMYPOSH_THEME" ]; then
+    eval "$(oh-my-posh init zsh --config $OHMYPOSH_THEME)"
   else
-    echo "⚠️  Warning: oh-my-posh theme file ~/atomic.omp.json not found"
+    echo "⚠️  Warning: oh-my-posh theme not configured (set OHMYPOSH_THEME in ~/.zshrc_private)"
   fi
 else
   echo "⚠️  Warning: oh-my-posh not found (using default prompt)"
-fi
-
-# Load private configuration
-if [ -f ~/.zshrc_private ]; then
-    source ~/.zshrc_private
 fi

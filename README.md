@@ -95,8 +95,8 @@ brew search nerd-font
 ```bash
 brew install oh-my-posh
 ```
-- Download themes from: https://ohmyposh.dev/docs/themes
-- Example: `wget https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/atomic.omp.json -O ~/.atomic.omp.json`
+- Browse themes at: https://ohmyposh.dev/docs/themes
+- Download your preferred theme JSON file and save it to your home directory (`~/`)
 
 **Zoxide** - Smarter cd command
 ```bash
@@ -118,7 +118,6 @@ brew install neovim
 ## 📦 Installation
 
 ### 1. Clone the Repository
-
 ```bash
 git clone git@github.com:fernanluyano/dev-environment.git ~/dev-environment
 ```
@@ -128,7 +127,6 @@ git clone git@github.com:fernanluyano/dev-environment.git ~/dev-environment
 ### 2. Backup Existing Configurations
 
 **Always backup your current configurations before proceeding:**
-
 ```bash
 # Create backup directory
 mkdir -p ~/.config_backup
@@ -140,7 +138,6 @@ mkdir -p ~/.config_backup
 ```
 
 ### 3. Create Symlinks
-
 ```bash
 # Remove existing files (they're backed up!)
 rm -f ~/.zshrc
@@ -154,7 +151,6 @@ ln -s ~/dev-environment/nvim ~/.config/nvim
 ```
 
 ### 4. Apply Configurations
-
 ```bash
 # Reload zsh
 source ~/.zshrc
@@ -166,7 +162,6 @@ tmux source ~/.tmux.conf
 ## ⚙️ Configuration
 
 ### Repository Structure
-
 ```
 dev-environment/
 ├── .zshrc           # Zsh configuration
@@ -197,7 +192,6 @@ Each configuration file can be customized to your preferences:
 The `.zshrc` automatically sources `~/.zshrc_private` for sensitive or machine-specific settings that shouldn't be version controlled.
 
 ### Setup Private Config
-
 ```bash
 touch ~/.zshrc_private
 chmod 600 ~/.zshrc_private  # Restrict permissions
@@ -212,7 +206,6 @@ chmod 600 ~/.zshrc_private  # Restrict permissions
 - Private environment variables
 
 ### Example `~/.zshrc_private`
-
 ```bash
 # Custom ASCII welcome message
 clear
@@ -237,6 +230,9 @@ echo ""
 
 # Tmux settings (for themes)
 export TMUX_LOCATION="New York"
+
+# Oh My Posh theme configuration
+export OHMYPOSH_THEME="$HOME/atomic.omp.json"
 
 # API Keys (NEVER commit these!)
 export OPENAI_API_KEY="sk-..."
@@ -263,7 +259,6 @@ function project() {
 ### Updating
 
 To update your environment with the latest changes:
-
 ```bash
 cd ~/dev-environment
 git pull
@@ -330,4 +325,3 @@ This is a personal configuration, but suggestions are welcome!
 ## 📝 License
 
 MIT License - See [LICENSE](LICENSE) file for details.
-
