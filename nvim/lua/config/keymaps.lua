@@ -4,26 +4,35 @@
 
 vim.g.mapleader = " "
 
-local keymap = vim.keymap
+local map = vim.keymap.set
 
-keymap.set("n", "<leader>C", "<Nop>", { desc = "Code Compilaion/Build/Tools" })
-keymap.set("n", "<leader>Cc", "<cmd>terminal make compile<CR>", { desc = "Compile Project" })
+map("n", "<leader>C", "<Nop>", { desc = "Code Compilaion/Build/Tools" })
+map("n", "<leader>Cc", "<cmd>terminal make compile<CR>", { desc = "Compile Project" })
 
-keymap.set("n", "<leader>h", "<Nop>", { desc = "Harpoon" })
+map("n", "<leader>h", "<Nop>", { desc = "Harpoon" })
 -- Nvim DAP
-keymap.set("n", "<Leader>dl", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Debugger step into" })
-keymap.set("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugger step over" })
-keymap.set("n", "<Leader>dk", "<cmd>lua require'dap'.step_out()<CR>", { desc = "Debugger step out" })
-keymap.set("n", "<Leader>dc", "<cmd>lua require'dap'.continue()<CR>", { desc = "Debugger continue" })
-keymap.set("n", "<Leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Debugger toggle breakpoint" })
-keymap.set(
+map("n", "<Leader>dl", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Debugger step into" })
+map("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugger step over" })
+map("n", "<Leader>dk", "<cmd>lua require'dap'.step_out()<CR>", { desc = "Debugger step out" })
+map("n", "<Leader>dc", "<cmd>lua require'dap'.continue()<CR>", { desc = "Debugger continue" })
+map("n", "<Leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Debugger toggle breakpoint" })
+map(
   "n",
   "<Leader>dd",
   "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
   { desc = "Debugger set conditional breakpoint" }
 )
-keymap.set("n", "<Leader>de", "<cmd>lua require'dap'.terminate()<CR>", { desc = "Debugger reset" })
-keymap.set("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugger run last" })
+map("n", "<Leader>de", "<cmd>lua require'dap'.terminate()<CR>", { desc = "Debugger reset" })
+map("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugger run last" })
 
 -- rustaceanvim
-keymap.set("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
+map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
+
+-- Tmux navigator
+if os.getenv("TMUX") then
+  map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>")
+  map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>")
+  map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>")
+  map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>")
+  map("n", "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>")
+end

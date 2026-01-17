@@ -74,6 +74,13 @@ brew install sdkman-cli
 ```
 - More info: https://github.com/sdkman/homebrew-tap
 
+Add this to your `zshrc_private` file if you installed SDKMan
+
+```bash
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+```
+
 Example SDK installations:
 ```bash
 # Java
@@ -301,10 +308,9 @@ alias deploy-staging="kubectl config use-context staging && ./deploy.sh"
 alias homelab="ssh admin@192.168.1.100"
 alias vps="ssh root@your-vps-ip"
 
-# Custom functions
-function project() {
-    cd ~/projects/$1 && code .
-}
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
 ```
 
 ## 🚀 Usage
