@@ -94,6 +94,13 @@ else
     echo "⚠️  Warning: zoxide not found (cd command will use default behavior)"
 fi
 
+# LazyGit only set alias if available
+if command -v lazygit &> /dev/null; then
+    alias lgit=lazygit
+else
+    echo "⚠️  Warning: lazygit not found"
+fi
+
 # Load private configuration first
 if [ -f ~/.zshrc_private ]; then
     source ~/.zshrc_private
