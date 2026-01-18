@@ -118,7 +118,7 @@ else
 fi
 
 # SDKMan - only load if installed
-if command -v sdk &> /dev/null; then
+if brew --prefix sdkman-cli &> /dev/null; then
     export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
     [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
 else

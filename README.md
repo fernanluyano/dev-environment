@@ -267,10 +267,10 @@ chmod 600 ~/.zshrc_private  # Restrict permissions
 
 ### Example `~/.zshrc_private`
 ```bash
-# Custom ASCII welcome message
+ # Add custom/private configs
+
 clear
-echo "\033[1;32m"  # Bright green
-cat << "EOF"
+ BANNER=$(cat << "EOF"
     ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗
     ██╔════╝╚██╗ ██╔╝██╔════╝╚══██╔══╝██╔════╝████╗ ████║
     ███████╗ ╚████╔╝ ███████╗   ██║   █████╗  ██╔████╔██║
@@ -278,39 +278,143 @@ cat << "EOF"
     ███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║
     ╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝
 EOF
-echo "\033[0;32m"  # Normal green
+)
+echo "\033[1;32m"
+echo "$BANNER"
+echo "\033[0;32m"
 echo "    ════════════════════════════════════════════════════"
 echo "\033[1;32m              ░▒▓ READY TO CODE ▓▒░\033[0m"
 echo ""
+
+# Cache configuration
+CACHE_FILE="$HOME/.zsh_versions_cache"
+CACHE_DURATION=3600  # 1 hour in seconds
+
+# Function to get file modification time
+get_file_age() {
+    if [ -f "$1" ]; then
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            # macOS
+            echo $(($(date +%s) - $(stat -f %m "$1")))
+        else
+            # Linux
+            echo $(($(date +%s) - $(stat -c %Y "$1")))
+        fi
+    else
+        # DNE, return a large number
+        echo 999999
+    fi
+}
+
+# Function to generate and cache versions
+generate_versions() {
+    JAVA_VER=$(java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}')
+    if [ -z "$JAVA_VER" ]; then JAVA_VER="NONE"; fi
+
+    SCALA_VER=$(scala -version 2>&1 | grep 'Scala version' | awk '{print $4}')
+    if [ -z "$SCALA_VER" ]; then SCALA_VER="NONE"; fi
+
+    SCALA_CLI_VER=$(scala-cli -version 2>/dev/null | grep 'Scala CLI version' | awk '{print $4}')
+    if [ -z "$SCALA_CLI_VER" ]; then SCALA_CLI_VER="NONE"; fi
+
+    AMMONITE_VER=$(amm -v 2>/dev/null | awk -F', ' '{print $2}')
+    if [ -z "$AMMONITE_VER" ]; then AMMONITE_VER="NONE"; fi
+
+    GO_VER=$(go version 2>/dev/null | awk '{print $3}' | sed 's/go//')
+    if [ -z "$GO_VER" ]; then GO_VER="NONE"; fi
+
+    PYTHON_VER=$(python3 --version 2>/dev/null | awk '{print $2}')
+    if [ -z "$PYTHON_VER" ]; then PYTHON_VER="NONE"; fi
+
+    RUST_VER=$(rustc --version 2>/dev/null | awk '{print $2}')
+    if [ -z "$RUST_VER" ]; then RUST_VER="NONE"; fi
+
+    MAVEN_VER=$(mvn --version 2>/dev/null | head -n 1 | awk '{print $3}')
+    if [ -z "$MAVEN_VER" ]; then MAVEN_VER="NONE"; fi
+
+    GRADLE_VER=$(gradle --version 2>/dev/null | grep 'Gradle' | awk '{print $2}')
+    if [ -z "$GRADLE_VER" ]; then GRADLE_VER="NONE"; fi
+
+    SBT_VER=$(sbt --version 2>&1 | grep 'sbt script version' | awk '{print $4}')
+    if [ -z "$SBT_VER" ]; then SBT_VER="NONE"; fi
+
+    SDK_VER=$(sdk version 2>/dev/null | grep 'script:' | awk '{print $2}')
+    if [ -z "$SDK_VER" ]; then SDK_VER="NONE"; fi
+
+    DATABRICKS_VER=$(databricks --version 2>/dev/null | awk '{print $3}')
+    if [ -z "$DATABRICKS_VER" ]; then DATABRICKS_VER="NONE"; fi
+
+    # Save to cache file
+    cat > "$CACHE_FILE" <<EOF
+JAVA_VER="$JAVA_VER"
+SCALA_VER="$SCALA_VER"
+SCALA_CLI_VER="$SCALA_CLI_VER"
+AMMONITE_VER="$AMMONITE_VER"
+GO_VER="$GO_VER"
+PYTHON_VER="$PYTHON_VER"
+RUST_VER="$RUST_VER"
+MAVEN_VER="$MAVEN_VER"
+GRADLE_VER="$GRADLE_VER"
+SBT_VER="$SBT_VER"
+SDK_VER="$SDK_VER"
+DATABRICKS_VER="$DATABRICKS_VER"
+EOF
+}
+
+# Check cache and load versions
+CACHE_AGE=$(get_file_age "$CACHE_FILE")
+
+if [ $CACHE_AGE -lt $CACHE_DURATION ]; then
+    # Cache is fresh, load from file
+    source "$CACHE_FILE"
+else
+    # Cache is stale or doesn't exist, regenerate
+    generate_versions
+fi
+
+# Display system info
 echo "\033[0;32m    [SYSTEM ONLINE]"
-echo "    > USER: $(whoami)"
-echo "    > TIME: $(date '+%H:%M:%S')"
-echo "    > PATH: $(pwd)\033[0m"
+echo "    > USER:             $(whoami)"
+echo "    > TIME:             $(date '+%H:%M:%S')"
+echo ""
+echo "    [CORE LANGUAGES]"
+echo "    > JAVA:             ${JAVA_VER}"
+echo "    > SCALA:            ${SCALA_VER}"
+echo "    > GO:               ${GO_VER}"
+echo "    > PYTHON:           ${PYTHON_VER}"
+echo "    > RUST:             ${RUST_VER}"
+echo ""
+echo "    [LANGUAGE TOOLING]"
+echo "    > SCALA-CLI:        ${SCALA_CLI_VER}"
+echo "    > AMMONITE:         ${AMMONITE_VER}"
+echo "    > MAVEN:            ${MAVEN_VER}"
+echo "    > GRADLE:           ${GRADLE_VER}"
+echo "    > SBT:              ${SBT_VER}"
+echo ""
+echo "    [TOOLS]"
+echo "    > SDKMAN:           ${SDK_VER}"
+echo "    > DATABRICKS (CLI): ${DATABRICKS_VER}"
 echo ""
 
-# Tmux settings (for themes)
-export TMUX_LOCATION="New York"
+# Optional: Add a command to manually refresh the cache
+refresh_versions() {
+    echo "Refreshing version cache..."
+    generate_versions
+    source "$CACHE_FILE"
+    echo "Cache refreshed!"
+}
 
-# Oh My Posh theme configuration
+export TMUX_LOCATION="Orlando, FL"
+
+# Custom aliases
+
+DEV_ENV="~/dev/github/dev-environment"
+
+alias goto_dev_environment="cd $DEV_ENV"
+alias edit_dev_environment="vim $DEV_ENV"
+alias edit_zsh_private="vim ~/.zshrc_private"
+
 export OHMYPOSH_THEME="$HOME/atomic.omp.json"
-
-# API Keys (NEVER commit these!)
-export OPENAI_API_KEY="sk-..."
-export GITHUB_TOKEN="ghp_..."
-export AWS_ACCESS_KEY_ID="AKIA..."
-export AWS_SECRET_ACCESS_KEY="..."
-
-# Work-specific shortcuts
-alias work="cd ~/work/projects"
-alias deploy-staging="kubectl config use-context staging && ./deploy.sh"
-
-# Personal servers
-alias homelab="ssh admin@192.168.1.100"
-alias vps="ssh root@your-vps-ip"
-
-export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
-[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
-
 ```
 
 ## 🚀 Usage
