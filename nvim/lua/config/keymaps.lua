@@ -8,6 +8,21 @@ local map = vim.keymap.set
 
 map("n", "<leader>C", "<Nop>", { desc = "Code Compilaion/Build/Tools" })
 map("n", "<leader>Cc", "<cmd>terminal make compile<CR>", { desc = "Compile Project" })
+map("n", "<leader>Ct", function()
+  require("neotest").run.run()
+end, { desc = "Run nearest test" })
+map("n", "<leader>Cf", function()
+  require("neotest").run.run(vim.fn.expand("%"))
+end, { desc = "Run test file" })
+map("n", "<leader>Ca", function()
+  require("neotest").run.run(vim.fn.getcwd())
+end, { desc = "Run all tests" })
+map("n", "<leader>Cs", function()
+  require("neotest").summary.toggle()
+end, { desc = "Toggle test summary" })
+map("n", "<leader>Co", function()
+  require("neotest").output.open()
+end, { desc = "Show test output" })
 
 map("n", "<leader>h", "<Nop>", { desc = "Harpoon" })
 -- Nvim DAP
