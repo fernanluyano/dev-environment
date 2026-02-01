@@ -10,4 +10,13 @@ return {
       })
     end,
   },
+  {
+    "lukas-reineke/virt-column.nvim",
+    config = function()
+      require("virt-column").setup({
+        enabled = true,
+        virtcolumn = "+1,120",
+      })
+    end,
+  },
 }

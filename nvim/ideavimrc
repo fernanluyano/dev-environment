@@ -68,7 +68,7 @@ nnoremap <Esc> :nohlsearch<cr>
 map <M-k> <Action>(EditorUp)
 map <M-j> <Action>(EditorDown)
 
- " Groups preix docs
+ " Groups prefix docs
 let g:WhichKeyDesc_buffer = "<leader>b +buffer"
 let g:WhichKeyDesc_window = "<leader>w +window"
 let g:WhichKeyDesc_find = "<leader>f +find"
@@ -78,6 +78,8 @@ let g:WhichKeyDesc_code = "<leader>c +code"
 let g:WhichKeyDesc_compile = "<leader>C +compile/build"
 let g:WhichKeyDesc_error = "<leader>e +error"
 let g:WhichKeyDesc_ui = "<leader>u +ui"
+let g:WhichKeyDesc_prev = "[ +prev"
+let g:WhichKeyDesc_next = "] +next"
 
 " Window/Tab/Buffer management
 
@@ -113,6 +115,13 @@ let g:WhichKeyDesc_window_unsplit = "<leader>wq Close Current Split"
 
 map <leader>waq <Action>(UnsplitAll)
 let g:WhichKeyDesc_window_unsplit_all = "<leader>waq Unsplit All Panels"
+
+map ]b <Action>(NextTab)
+let g:WhichKeyDesc_tab_next = "]b Next Tab"
+
+map [b <Action>(PreviousTab)
+let g:WhichKeyDesc_tab_previous = "[b Previous Tab"
+
 
 " Switch to Left Split
 nnoremap <C-h> <C-w>h

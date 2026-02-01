@@ -3,6 +3,7 @@ return {
     "V4N1LLA-1CE/xcodedark.nvim",
     lazy = false,
     priority = 1000,
+    enabled = false,
     config = function()
       require("xcodedark").setup({
         -- New color scheme with your specifications
@@ -38,6 +39,28 @@ return {
         terminal_colors = true,
       })
       vim.cmd.colorscheme("xcodedark")
+    end,
+  },
+  {
+    "rose-pine/neovim",
+    lazy = false,
+    priority = 1000,
+    enabled = false,
+    name = "rose-pine",
+    config = function()
+      vim.cmd("colorscheme rose-pine")
+    end,
+  },
+  {
+    "sainnhe/sonokai",
+    lazy = false,
+    priority = 1000,
+    enabled = true,
+    config = function()
+      -- Optionally configure and load the colorscheme
+      -- directly inside the plugin declaration.
+      vim.g.sonokai_enable_italic = true
+      vim.cmd.colorscheme("sonokai")
     end,
   },
 }
