@@ -16,7 +16,7 @@ return {
       require("virt-column").setup({
         enabled = true,
         virtcolumn = "120",
-        char = " │", -- Use a solid vertical line character
+        char = "│", -- Use a solid vertical line character
       })
     end,
   },
