@@ -192,6 +192,8 @@ let g:WhichKeyDesc_quick_type_def = "<leader>st Quick Type Definition"
 map <leader>sT <Action>(ActivateTODOToolWindow)
 let g:WhichKeyDesc_show_todos = "<leader>sT Show TODOs"
 
+nmap s <Action>(flash.search)
+xmap s <Action>(flash.search)
 
 " ### GIT ###
 map <leader>gb <Action>(Annotate)
