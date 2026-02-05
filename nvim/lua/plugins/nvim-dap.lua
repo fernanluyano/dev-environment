@@ -1,4 +1,7 @@
 -- dap.lua
+
+local dap = require("dap")
+
 return {
   {
     "mfussenegger/nvim-dap",
@@ -18,7 +21,6 @@ return {
     config = function()
       require("dapui").setup()
 
-      local dap = require("dap")
       dap.listeners.before["event_initialized"]["dapui_config"] = function()
         require("dapui").open()
       end

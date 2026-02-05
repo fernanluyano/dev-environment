@@ -3,7 +3,7 @@ return {
     "V4N1LLA-1CE/xcodedark.nvim",
     lazy = false,
     priority = 1000,
-    enabled = false,
+    enabled = true,
     config = function()
       require("xcodedark").setup({
         -- New color scheme with your specifications
@@ -25,7 +25,7 @@ return {
         -- Font weight customization
         styles = {
           comments = { italic = true },
-          keywords = { bold = true },
+          keywords = {},
           functions = {},
           variables = {},
           strings = {},
@@ -37,8 +37,32 @@ return {
         },
 
         terminal_colors = true,
+
+        color_overrides = {
+          keyword = "#E07AB2",
+          string = "#FF978A",
+          bg = "#1a1b21",
+        },
       })
       vim.cmd.colorscheme("xcodedark")
+
+      -- Wait a bit for colorscheme to fully load, then override
+      vim.defer_fn(function()
+        -- TreeSitter and lsp groups
+        vim.api.nvim_set_hl(0, "@keyword", { fg = "#E07AB2", bold = false })
+        vim.api.nvim_set_hl(0, "@boolean.scala", { fg = "#E07AB2", bold = true })
+        vim.api.nvim_set_hl(0, "@keyword.scala", { fg = "#E07AB2", bold = false })
+        vim.api.nvim_set_hl(0, "@lsp.type.keyword.scala", { fg = "#E07AB2", bold = false })
+        vim.api.nvim_set_hl(0, "@lsp.type.modifier.scala", { fg = "#E07AB2", bold = false })
+
+        vim.api.nvim_set_hl(0, "@string", { fg = "#E89B7A" })
+        vim.api.nvim_set_hl(0, "@string.scala", { fg = "#E89B7A" })
+
+        vim.api.nvim_set_hl(0, "@comment", { fg = "#6C7986", italic = true })
+        vim.api.nvim_set_hl(0, "@comment.scala", { fg = "#6C7986", italic = true })
+
+        vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1b21" })
+      end, 100)
     end,
   },
   {
@@ -55,7 +79,7 @@ return {
     "sainnhe/sonokai",
     lazy = false,
     priority = 1000,
-    enabled = true,
+    enabled = false,
     config = function()
       -- Optionally configure and load the colorscheme
       -- directly inside the plugin declaration.
