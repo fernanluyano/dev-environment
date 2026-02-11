@@ -1,9 +1,24 @@
-return {
-  -- Basic setup, terraform-ls works well with defaults
-  settings = {},
+-- Register filetypes
+vim.filetype.add({
+  extension = {
+    tf = "terraform",
+    tfvars = "terraform-vars",
+  },
+  pattern = {
+    [".*%.tfvars"] = "terraform-vars",
+    [".*%.tf%.json"] = "terraform",
+  },
+})
 
-  -- Optional: if you want custom on_attach
-  on_attach = function(client, bufnr)
-    -- Your custom keybindings or settings
-  end,
+return {
+  filetypes = { "terraform", "terraform-vars" },
+
+  settings = {
+    ["terraform-ls"] = {
+      experimentalFeatures = {
+        validateOnSave = true,
+        prefillRequiredFields = true,
+      },
+    },
+  },
 }
