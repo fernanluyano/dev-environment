@@ -2,6 +2,7 @@ vim.lsp.enable({
   "gopls",
   "lua_ls",
   "roslyn",
+  "terraformls",
 })
 
 vim.diagnostic.config({
