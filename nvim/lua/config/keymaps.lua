@@ -55,6 +55,11 @@ end, { desc = "Inspect value" })
 -- rustaceanvim
 map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
 
+-- Format
+map("n", "<leader>cf", function()
+  require("conform").format({ lsp_fallback = true })
+end, { desc = "Format buffer" })
+
 -- Tmux navigator
 if os.getenv("TMUX") then
   map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>")

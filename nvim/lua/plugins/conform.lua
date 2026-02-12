@@ -4,9 +4,8 @@ return {
     formatters_by_ft = {
       scala = { "scalafmt" },
     },
-    format_on_save = {
-      timeout_ms = 1000,
-      lsp_fallback = true,
-    },
+    -- Disable auto-format on save
+    -- Manual formatting available via <leader>cf keybinding
+    format_on_save = false,
   },
 }

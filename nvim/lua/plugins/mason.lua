@@ -17,7 +17,7 @@ return {
       "json-lsp",
       "stylua",
       "roslyn",
-      "netcoredg",
+      "netcoredbg",
     },
     automatic_installation = true,
   },
