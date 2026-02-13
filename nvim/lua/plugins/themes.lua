@@ -1,6 +1,7 @@
 return {
   {
     "V4N1LLA-1CE/xcodedark.nvim",
+    -- dir = "/Users/fberlanga/dev/github/xcodedark.nvim",
     lazy = false,
     priority = 1000,
     enabled = true,
@@ -25,7 +26,7 @@ return {
         -- Font weight customization
         styles = {
           comments = { italic = true },
-          keywords = {},
+          keywords = { bold = false },
           functions = {},
           variables = {},
           strings = {},
@@ -40,8 +41,11 @@ return {
 
         color_overrides = {
           keyword = "#E07AB2",
-          string = "#FF978A",
+          string = "#FC8A5E",
           bg = "#1A1B21",
+          variable = "#C8C8C8",
+          constant = "#C8C8C8",
+          parameter = "#1C68BD",
         },
       })
       vim.cmd.colorscheme("xcodedark")
