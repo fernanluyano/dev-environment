@@ -43,8 +43,6 @@ return {
           keyword = "#E07AB2",
           string = "#FC8A5E",
           bg = "#1A1B21",
-          variable = "#C8C8C8",
-          constant = "#C8C8C8",
           parameter = "#1C68BD",
         },
       })

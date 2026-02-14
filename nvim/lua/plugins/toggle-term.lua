@@ -24,6 +24,7 @@ return {
     auto_scroll = true,
     float_opts = {
       border = "curved",
+      height = math.floor(vim.o.lines * 0.5),
       winblend = 0,
       highlights = {
         border = "Normal",
@@ -34,8 +35,8 @@ return {
   keys = {
     { [[<C-\>]], "<cmd>ToggleTerm 1 direction=float<cr>", desc = "Toggle terminal" },
     { "<leader>Tf", "<cmd>ToggleTerm 1 direction=float<cr>", desc = "Terminal Float" },
-    { "<leader>Th", "<cmd>ToggleTerm 2 size=10 direction=horizontal<cr>", desc = "Terminal Horizontal" },
-    { "<leader>Tv", "<cmd>ToggleTerm 3 size=80 direction=vertical<cr>", desc = "Terminal Vertical" },
+    { "<leader>Th", "<cmd>ToggleTerm 2 size=30 direction=horizontal<cr>", desc = "Terminal Horizontal" },
+    { "<leader>Tv", "<cmd>ToggleTerm 3 size=140 direction=vertical<cr>", desc = "Terminal Vertical" },
     { "<leader>Ts", "<cmd>lua _SBT_TOGGLE()<CR>", desc = "SBT Shell" },
     { "<leader>Tn", "<cmd>lua _NODE_TOGGLE()<CR>", desc = "Node" },
     { "<leader>Tp", "<cmd>lua _PYTHON_TOGGLE()<CR>", desc = "Python" },
