@@ -173,6 +173,34 @@ You have two options to configure IdeaVim:
 
 > 💡 **Note:** Using a symlink allows your IdeaVim config to stay updated when you pull changes from the repository.
 
+### AI Coding Assistant
+
+**Claude Code** - Anthropic's AI coding assistant for the terminal
+```bash
+brew install claude-code
+```
+- More info: https://claude.ai/code
+
+**Yazi** - Blazing fast terminal file manager
+```bash
+brew install yazi
+```
+- More info: https://yazi-rs.github.io/docs/installation/#homebrew
+
+Symlink the config files:
+```bash
+# Create config directory if it doesn't exist
+mkdir -p ~/.config/yazi
+
+# Create symlinks for each config file
+ln -s ~/dev-environment/yazi/yazi.toml ~/.config/yazi/yazi.toml
+ln -s ~/dev-environment/yazi/keymap.toml ~/.config/yazi/keymap.toml
+ln -s ~/dev-environment/yazi/theme.toml ~/.config/yazi/theme.toml
+ln -s ~/dev-environment/yazi/flavors ~/.config/yazi/flavors
+```
+
+> 💡 **Note:** Using symlinks keeps your Yazi config in sync when you pull changes from the repository.
+
 ## 📦 Installation
 
 ### 1. Clone the Repository

@@ -24,7 +24,7 @@ return {
     auto_scroll = true,
     float_opts = {
       border = "curved",
-      height = math.floor(vim.o.lines * 0.5),
+      height = math.floor(vim.o.lines * 0.8),
       winblend = 0,
       highlights = {
         border = "Normal",

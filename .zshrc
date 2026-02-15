@@ -124,3 +124,18 @@ if brew --prefix sdkman-cli &> /dev/null; then
 else
     echo "⚠️  Warning: sdkman not found (optional tool)"
 fi
+
+# Yazi
+export EDITOR="nvim"
+if command -v yazi &> /dev/null; then
+    function y() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            builtin cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
+    }
+else
+    echo "⚠️  Warning: yazi not found (y function not available)"
+fi
