@@ -1,5 +1,17 @@
 return {
   {
+    "vague-theme/vague.nvim",
+    lazy = false,
+    priority = 1000,
+    enabled = false,
+    config = function()
+      require("vague").setup({
+        transparent = false,
+      })
+      vim.cmd("colorscheme vague")
+    end,
+  },
+  {
     "V4N1LLA-1CE/xcodedark.nvim",
     -- dir = "/Users/fberlanga/dev/github/xcodedark.nvim",
     lazy = false,
@@ -56,6 +68,13 @@ return {
     enabled = false,
     name = "rose-pine",
     config = function()
+      require("rose-pine").setup({
+        palette = {
+          main = {
+            base = "#000000",
+          },
+        },
+      })
       vim.cmd("colorscheme rose-pine")
     end,
   },
