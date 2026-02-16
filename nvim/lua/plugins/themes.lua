@@ -4,7 +4,7 @@ return {
     -- dir = "/Users/fberlanga/dev/github/xcodedark.nvim",
     lazy = false,
     priority = 1000,
-    enabled = false,
+    enabled = true,
     config = function()
       require("xcodedark").setup({
         -- New color scheme with your specifications
@@ -63,7 +63,7 @@ return {
     "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
-    enabled = true,
+    enabled = false,
     config = function()
       require("onedark").setup({
         style = "darker",
@@ -72,6 +72,22 @@ return {
         },
       })
       require("onedark").load()
+    end,
+  },
+  {
+    "Mofiqul/vscode.nvim",
+    lazy = false,
+    priority = 1000,
+    enabled = false,
+    config = function()
+      require("vscode").setup({
+        style = "dark",
+        transparent = false,
+        italic_comments = true,
+        underline_links = true,
+        disable_nvimtree_bg = true,
+      })
+      require("vscode").load()
     end,
   },
   {
@@ -111,39 +127,6 @@ return {
         },
       })
       vim.cmd.colorscheme("catppuccin")
-    end,
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
-    enabled = false,
-    config = function()
-      require("kanagawa").setup({
-        compile = false,
-        undercurl = true,
-        commentStyle = { italic = true },
-        functionStyle = {},
-        keywordStyle = { italic = true },
-        statementStyle = { bold = true },
-        typeStyle = {},
-        transparent = true,
-        dimInactive = false,
-        terminalColors = true,
-        colors = {
-          palette = {},
-          theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-        },
-        overrides = function(_)
-          return {}
-        end,
-        theme = "wave",
-        background = {
-          dark = "wave",
-          light = "lotus",
-        },
-      })
-      vim.cmd("colorscheme kanagawa")
     end,
   },
 }
