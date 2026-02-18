@@ -9,6 +9,7 @@ local map = vim.keymap.set
 -- neotest
 local neotest = require("neotest")
 
+map("n", "<leader>h", "<Nop>", { desc = "Harpoon" })
 map("n", "<leader>C", "<Nop>", { desc = "Code Compilaion/Build/Tools" })
 map("n", "<leader>Cc", "<cmd>terminal make compile<CR>", { desc = "Compile Project" })
 
