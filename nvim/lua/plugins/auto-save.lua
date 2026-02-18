@@ -10,6 +10,13 @@ return {
         defer_save = { "InsertLeave", "TextChanged" },
       },
       debounce_delay = 1000, -- save after 1 second of no typing
+      condition = function(buf)
+        local buftype = vim.bo[buf].buftype
+        if buftype == "acwrite" or buftype == "nofile" then
+          return false
+        end
+        return true
+      end,
     })
   end,
 }

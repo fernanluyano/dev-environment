@@ -9,6 +9,7 @@ return {
   config = function()
     local harpoon = require("harpoon")
 
+    -- test comment
     harpoon:setup()
 
     -- Open harpoon files in splits from inside the UI
@@ -19,6 +20,9 @@ return {
         end, { buffer = cx.bufnr })
         vim.keymap.set("n", "<C-x>", function()
           harpoon.ui:select_menu_item({ split = true })
+        end, { buffer = cx.bufnr })
+        vim.keymap.set("n", "<Esc>", function()
+          vim.api.nvim_win_close(0, true)
         end, { buffer = cx.bufnr })
       end,
     })
