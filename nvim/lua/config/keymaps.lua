@@ -38,6 +38,54 @@ map("n", "<leader>td", function()
   neotest.run.run({ strategy = "dap" })
 end, { desc = "Debug nearest test" })
 
+-- nvim metals does not support creating a test file
+map("n", "<leader>tc", function()
+  local path = vim.fn.expand("%:p")
+  local main_marker = "/src/main/scala/"
+  local i = path:find(main_marker, 1, true)
+  if not i then
+    vim.notify("Not in src/main/scala/", vim.log.levels.WARN)
+    return
+  end
+
+  local rel = path:sub(i + #main_marker)
+  local test_path = path:sub(1, i) .. "src/test/scala/" .. rel:gsub("%.scala$", "Test.scala")
+
+  if vim.fn.filereadable(test_path) == 1 then
+    vim.cmd("edit " .. test_path)
+    return
+  end
+
+  -- Read package from the source file
+  local pkg = ""
+  for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, 10, false)) do
+    local m = line:match("^package%s+(.+)$")
+    if m then
+      pkg = m
+      break
+    end
+  end
+
+  local class_name = vim.fn.expand("%:t"):gsub("%.scala$", "")
+  local test_class = class_name .. "Test"
+
+  local content = {}
+  if package ~= "" then
+    table.insert(content, "package " .. pkg)
+    table.insert(content, "")
+  end
+  table.insert(content, "import org.scalatest.funsuite.AnyFunSuite")
+  table.insert(content, "")
+  table.insert(content, "class " .. test_class .. " extends AnyFunSuite {")
+  table.insert(content, "")
+  table.insert(content, "}")
+
+  vim.fn.mkdir(vim.fn.fnamemodify(test_path, ":h"), "p")
+  vim.fn.writefile(content, test_path)
+  vim.cmd("edit " .. test_path)
+  vim.notify("Created " .. test_path, vim.log.levels.INFO)
+end, { desc = "Create/Go to test class" })
+
 -- dap
 local dap = require("dap")
 
