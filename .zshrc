@@ -136,6 +136,7 @@ if command -v yazi &> /dev/null; then
         fi
         rm -f -- "$tmp"
     }
+    alias files=yazi
 else
     echo "⚠️  Warning: yazi not found (y function not available)"
 fi
