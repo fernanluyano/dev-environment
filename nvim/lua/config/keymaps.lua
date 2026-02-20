@@ -6,10 +6,13 @@ vim.g.mapleader = " "
 
 local map = vim.keymap.set
 
+-- Remove LazyVim default H/L buffer cycle (used by arrow instead)
+pcall(vim.keymap.del, "n", "H")
+pcall(vim.keymap.del, "n", "L")
+
 -- neotest
 local neotest = require("neotest")
 
-map("n", "<leader>h", "<Nop>", { desc = "Harpoon" })
 map("n", "<leader>C", "<Nop>", { desc = "Code Compilaion/Build/Tools" })
 map("n", "<leader>Cc", "<cmd>terminal make compile<CR>", { desc = "Compile Project" })
 

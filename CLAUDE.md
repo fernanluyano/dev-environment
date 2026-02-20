@@ -42,7 +42,7 @@ Built on [LazyVim](https://www.lazyvim.org/) with lazy.nvim as the plugin manage
 - `nvim/lsp/` — LSP server configs (`lua_ls.lua`, `pylsp.lua`)
 
 **Key plugins:**
-- `harpoon2` — file bookmarking
+- `arrow.nvim` — file bookmarking
 - `neotest` — test runner UI
 - `nvim-dap` + `dapui` — debugger
 - `conform.nvim` — formatting (autoformat is **disabled** by default; use `<leader>cf`)
@@ -55,22 +55,6 @@ Built on [LazyVim](https://www.lazyvim.org/) with lazy.nvim as the plugin manage
 
 ## Key Neovim Keymaps
 
-Leader key: `<Space>`
-
-| Key | Action |
-|-----|--------|
-| `<leader>ha/hs/hf` | Harpoon: add, menu, telescope |
-| `<leader>hj/hk/hl/h;` | Jump to harpoon files 1–4 |
-| `<leader>tt/tf/ta/ts/to` | Neotest: run nearest/file/all, summary, output |
-| `<leader>tc` | Create or jump to Scala test class |
-| `<leader>td` | Debug nearest test |
-| `<leader>cf` | Format buffer (conform) |
-| `<leader>ac/af/ar/aC` | Claude Code: toggle, focus, resume, continue |
-| `<leader>ab` | Add current buffer to Claude |
-| `<leader>aa/ad` | Accept/deny Claude diff |
-| `<leader>Cc` | Compile project (`make compile`) |
-| `F1–F7` | DAP: breakpoint, continue, run-to-cursor, step over/out/into, terminate |
-| `<C-h/j/k/l>` | Navigate panes (Neovim + Tmux, only when inside Tmux) |
 
 ## Tmux Config
 
