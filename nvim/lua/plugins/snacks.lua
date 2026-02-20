@@ -56,6 +56,23 @@ return {
         explorer = {
           auto_close = true,
           hidden = true,
+          actions = {
+            explorer_rename = function(picker, item)
+              if not item then return end
+              local from = vim.fn.fnamemodify(item.file, ":p")
+              local root = vim.fn.getcwd(0)
+              if from:find(root, 1, true) ~= 1 then
+                root = vim.fs.dirname(from)
+              end
+              local extra = from:sub(#root + 2)
+              local new_name = vim.fn.input({ prompt = "New File Name: ", default = extra, cancelreturn = "\0" })
+              if not new_name or new_name == "\0" or new_name == extra then return end
+              local to = root .. "/" .. new_name
+              Snacks.rename.rename_file({ from = from, to = to, on_rename = function(new, old)
+                picker:find()
+              end })
+            end,
+          },
           layout = {
             { preview = true },
             layout = {
