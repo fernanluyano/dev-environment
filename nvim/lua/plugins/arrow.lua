@@ -47,6 +47,6 @@ return {
     buffer_leader_key = "m",
     save_key = "git_root",
     global_bookmarks = false,
-    index_keys = "123456789zxcbnmZXVBNM,afghjklAFGHJKLwrtyuiopWRTYUIOP",
+    index_keys = "hjklyuiopnm",
   },
 }
