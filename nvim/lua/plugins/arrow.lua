@@ -42,7 +42,7 @@ return {
       },
       zindex = 10,
     },
-    separate_save_and_remove = false,
+    separate_save_and_remove = true,
     leader_key = ";",
     buffer_leader_key = "m",
     save_key = "git_root",
