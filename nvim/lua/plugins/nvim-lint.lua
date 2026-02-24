@@ -13,6 +13,7 @@ return {
       lua = { "stylua" },
       markdown = { "vale" },
       python = { "ruff" },
+      go = { "golangcilint" },
     }
 
     -- Autocommand to run linters when leaving insert mode or saving a file

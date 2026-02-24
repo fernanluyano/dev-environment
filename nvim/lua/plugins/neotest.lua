@@ -6,6 +6,7 @@ return {
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
     "stevanmilic/neotest-scala",
+    "nvim-neotest/neotest-go",
     "mfussenegger/nvim-dap",
   },
   config = function()
@@ -15,6 +16,7 @@ return {
         open = "botright vsplit | vertical resize 80",
       },
       adapters = {
+        require("neotest-go"),
         require("neotest-scala")({
           runner = "bloop",
           framework = "scalatest",

@@ -3,6 +3,7 @@ return {
   opts = {
     formatters_by_ft = {
       scala = { "scalafmt" },
+      go = { "gofumpt", "goimports" },
     },
     -- Disable auto-format on save
     -- Manual formatting available via <leader>cf keybinding
