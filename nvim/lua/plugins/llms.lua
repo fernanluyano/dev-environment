@@ -21,6 +21,7 @@ return {
       },
     },
     keys = {
+      { "<C-a>", "<cmd>ClaudeCodeFocus<cr>", desc = "Toggle Claude" },
       { "<leader>a", nil, desc = "AI/Claude Code" },
       { "<leader>ac", "<cmd>ClaudeCodeFocus<cr>", desc = "Toggle Claude" },
       { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },

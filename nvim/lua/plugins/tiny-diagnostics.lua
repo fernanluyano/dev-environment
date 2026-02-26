@@ -1,5 +1,6 @@
 return {
   "rachartier/tiny-inline-diagnostic.nvim",
+  commit = "ecce93ff7db4461e942c03e0fcc64bd785df4057",
   event = "LspAttach",
   priority = 1000,
   config = function()
