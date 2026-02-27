@@ -3,6 +3,9 @@ return {
   version = "v2.30.0",
   priority = 1000,
   lazy = false,
+  keys = {
+    { "<leader>gd", false },
+  },
 
   ---@type snacks.Config
   opts = {
