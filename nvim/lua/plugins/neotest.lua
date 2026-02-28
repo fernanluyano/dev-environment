@@ -20,6 +20,7 @@ return {
         require("neotest-scala")({
           runner = "bloop",
           framework = "scalatest",
+          create_keymap = "<leader>tc",
         }),
       },
     })
