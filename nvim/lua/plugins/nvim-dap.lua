@@ -1,12 +1,32 @@
--- dap.lua
-
-local dap = require("dap")
-
 return {
   {
     "mfussenegger/nvim-dap",
     config = function()
-      -- dap itself needs no config here; configs are set later
+      local dap = require("dap")
+
+      -- netcoredbg adapter for C#
+      dap.adapters.coreclr = {
+        type = "executable",
+        command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
+        args = { "--interpreter=vscode" },
+      }
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "Launch",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
+          end,
+        },
+        {
+          type = "coreclr",
+          name = "Attach",
+          request = "attach",
+          processId = require("dap.utils").pick_process,
+        },
+      }
     end,
   },
   {
@@ -27,6 +47,7 @@ return {
     "rcarratala/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text" },
     config = function()
+      local dap = require("dap")
       require("dapui").setup()
 
       dap.listeners.before["event_initialized"]["dapui_config"] = function()
